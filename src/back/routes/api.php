@@ -6,11 +6,11 @@ use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\CredencialesController;
 
 
-
 Route::get('/usuarios', [UsuarioController::class, 'index']);
-Route::get('/usuarioID/{id}', [UsuarioController::class, 'show']);
-// Definir la ruta para 'store'
+Route::get('/usuario/{id}', [UsuarioController::class, 'show']);
 Route::post('/loginUsuario', [UsuarioController::class, 'store']);
 
+
+Route::delete('deleteUsuario/{id}', [UsuarioController::class, 'destroy']);
 Route::resource('usuarios', UsuarioController::class);
 Route::resource('credenciales', CredencialesController::class);

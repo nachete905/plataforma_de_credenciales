@@ -13,7 +13,7 @@ class UsuarioController extends Controller
     public function index()
     {
         $usuarios = Usuario::all();
-        return response()->json($usuarios);
+        return response()->json($usuarios, 202);
     }
 
     /**
@@ -23,7 +23,7 @@ class UsuarioController extends Controller
     {
         $validatedData = $request->validate([
             'email' => 'required|string|email|max:255|unique:usuarios',
-            'password' => 'required|string|min:6|confirmed',
+            'password' => 'required|string|min:6',
             'encriptionword' => 'required|string|min:6',
         ]);
 
@@ -36,9 +36,8 @@ class UsuarioController extends Controller
         return response()->json($usuario, 201);
     }
 
-    /**
-     * Display the specified resource.
-     */
+
+
     public function show($id)
     {
         try {
@@ -58,7 +57,7 @@ class UsuarioController extends Controller
         // Define las reglas de validación, pero no exijas campos a menos que estén presentes
         $rules = [
             'email' => 'sometimes|required|email|unique:usuarios,email,' . $id,
-            'password' => 'sometimes|nullable|min:6',
+            'password' => 'sometimes|nullable|required|min:6',
             'encriptionWord' => 'sometimes|required|max:255',
         ];
 
@@ -77,7 +76,7 @@ class UsuarioController extends Controller
         }
 
         $usuario->save();
-        return response()->json($usuario);
+        return response()->json($usuario, 210);
     }
 
     /**
