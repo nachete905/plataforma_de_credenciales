@@ -12,8 +12,12 @@ class UsuarioController extends Controller
      */
     public function index()
     {
-        $usuarios = Usuario::all();
-        return response()->json($usuarios, 202);
+        try {
+            $usuarios = Usuario::all();
+            return response()->json($usuarios, 202);
+        } catch (\Illuminate\Database\QueryException $e) {
+            return response()->json(['error' => 'Error al obtener usuarios'], 500);
+        }
     }
 
     /**
@@ -21,19 +25,23 @@ class UsuarioController extends Controller
      */
     public function store(Request $request)
     {
-        $validatedData = $request->validate([
-            'email' => 'required|string|email|max:255|unique:usuarios',
-            'password' => 'required|string|min:6',
-            'encriptionword' => 'required|string|min:6',
-        ]);
+        try {
+            $validatedData = $request->validate([
+                'email' => 'required|string|email|max:255|unique:usuarios',
+                'password' => 'required|string|min:6',
+                'encriptionword' => 'required|string|min:6',
+            ]);
 
-        $usuario = new Usuario();
-        $usuario->email = $validatedData['email'];
-        $usuario->password = bcrypt($validatedData['password']);
-        $usuario->encriptionword = $validatedData['encriptionword'];
-        $usuario->save();
+            $usuario = new Usuario();
+            $usuario->email = $validatedData['email'];
+            $usuario->password = bcrypt($validatedData['password']);
+            $usuario->encriptionword = $validatedData['encriptionword'];
+            $usuario->save();
 
-        return response()->json($usuario, 201);
+            return response()->json($usuario, 201);
+        } catch (\Illuminate\Database\QueryException $e) {
+            return response()->json(['error' => 'Error al crear usuario'], 500);
+        }
     }
 
 
@@ -42,11 +50,23 @@ class UsuarioController extends Controller
     {
         try {
             $usuario = Usuario::findOrFail($id);
-            return response()->json($usuario);
+            return response()->json($usuario,202);
+        } catch (\Illuminate\Database\QueryException $e) {
+            return response()->json(['error' => 'Usuario no encontrado'], 404);
+        }
+    }
+
+    public function buscarEmail($email){
+        try {
+            $usuario = Usuario::where('email', $email)->firstOrFail();
+
+            return response()->json(['id' => $usuario->id], 200);
+
         } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
             return response()->json(['error' => 'Usuario no encontrado'], 404);
         }
     }
+
 
 
     /**
@@ -54,29 +74,32 @@ class UsuarioController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // Define las reglas de validación, pero no exijas campos a menos que estén presentes
-        $rules = [
-            'email' => 'sometimes|required|email|unique:usuarios,email,' . $id,
-            'password' => 'sometimes|nullable|required|min:6',
-            'encriptionWord' => 'sometimes|required|max:255',
-        ];
+        try {
+            $rules = [
+                'email' => 'sometimes|required|email|unique:usuarios,email,' . $id,
+                'password' => 'sometimes|nullable|required|min:6',
+                'encriptionWord' => 'sometimes|required|max:255',
+            ];
 
-        $validatedData = $request->validate($rules);
+            $validatedData = $request->validate($rules);
 
-        $usuario = Usuario::findOrFail($id);
+            $usuario = Usuario::findOrFail($id);
 
-        if (isset($validatedData['email'])) {
-            $usuario->email = $validatedData['email'];
+            if (isset($validatedData['email'])) {
+                $usuario->email = $validatedData['email'];
+            }
+            if (isset($validatedData['encriptionWord'])) {
+                $usuario->encriptionWord = $validatedData['encriptionWord'];
+            }
+            if (isset($validatedData['password'])) {
+                $usuario->password = bcrypt($validatedData['password']);
+            }
+
+            $usuario->save();
+            return response()->json($usuario, 210);
+        } catch (\Illuminate\Database\QueryException $e) {
+            return response()->json(['error' => 'Error al actualizar usuario'], 500);
         }
-        if (isset($validatedData['encriptionWord'])) {
-            $usuario->encriptionWord = $validatedData['encriptionWord'];
-        }
-        if (isset($validatedData['password'])) {
-            $usuario->password = bcrypt($validatedData['password']);
-        }
-
-        $usuario->save();
-        return response()->json($usuario, 210);
     }
 
     /**
@@ -84,9 +107,13 @@ class UsuarioController extends Controller
      */
     public function destroy($id)
     {
-        $usuario = Usuario::findOrFail($id);
-        $usuario->delete();
+        try {
+            $usuario = Usuario::findOrFail($id);
+            $usuario->delete();
 
-        return response()->json(null, 204);
+            return response()->json(null, 204);
+        } catch (\Illuminate\Database\QueryException $e) {
+            return response()->json(['error' => 'Error al borrar usuario'], 500);
+        }
     }
 }
