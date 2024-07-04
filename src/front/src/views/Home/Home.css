@@ -1,0 +1,23 @@
+/* colores */
+
+:root{
+    --color-primario: #6ba7f5;
+    --color-secundario: #101a29;
+    --color-detalles: #FFF;
+}
+
+/* ---------------------- */
+
+.fondoMain{
+    min-height: 100vh;
+    background-color: var(--color-secundario) !important;
+}
+
+.btn-main{
+    background-color: var(--color-primario) !important;
+    color: var(--color-detalles) !important;
+    font-weight: 700;
+    font-size: 40px;
+    border-radius: 45px;
+    padding: 0.2em;
+}
