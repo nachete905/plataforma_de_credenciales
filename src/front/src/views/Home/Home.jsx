@@ -9,12 +9,12 @@ export default function Home() {
           <img src="/images/logo.png" alt=""></img>
         </div>
         <div className="d-flex justify-content-center pt-5">
-          <button id="logIn" className="btn btn-main me-5 ">
+          <a href="/login"><button id="logIn" className="btn btn-main me-5" >
             INICIAR SESIÓN
-          </button>
-          <button id="register" className="btn btn-main ms-5 ">
+          </button></a>
+          <a href="/register"><button id="register" className="btn btn-main ms-5 " >
             CREAR CUENTA
-          </button>
+          </button></a>
         </div>
       </div>
     </>
