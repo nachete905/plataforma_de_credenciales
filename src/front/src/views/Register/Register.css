@@ -1,0 +1,40 @@
+/* colores */
+
+:root {
+  --color-primario: #6ba7f5;
+  --color-secundario: #101a29;
+  --color-detalles: #fff;
+}
+
+/* ---------------------- */
+
+.input-registro {
+  background-color: var(--color-primario) !important;
+  color: var(--color-secundario) !important;
+  font-weight: 700;
+}
+
+.input-registro::placeholder {
+  color: var(--color-secundario) !important;
+  font-weight: 700;
+}
+
+.input-registro:focus {
+  background-color: var(--color-secundario) !important;
+  color: var(--color-detalles) !important;
+  transition: 0.3s;
+}
+
+.input-registro:focus::placeholder {
+  color: var(--color-detalles) !important;
+  transition: 0.3s;
+}
+
+.titulo {
+  color: var(--color-primario);
+}
+
+.fondoRegistro {
+  min-height: 100vh;
+  background-color: var(--color-secundario);
+}
