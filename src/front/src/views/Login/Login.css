@@ -1,0 +1,30 @@
+:root {
+    --color-primario: #6ba7f5;
+    --color-secundario: #101a29;
+    --color-detalles: #FFF;
+  }
+  
+  .colorFondo {
+    min-height: 100vh;
+    background-color: var(--color-secundario) !important;
+  }
+  
+  .btn-main {
+    background-color: var(--color-primario) !important;
+    color: var(--color-detalles) !important;
+    width: 100px;
+    font-weight: 700;
+    font-size: 20px;
+    border-radius: 45px;
+    padding: 0.2em;
+  }
+  
+  #label1 {
+    color: var(--color-detalles) !important;
+  }
+  
+  .input-large {
+    width: 300px; 
+    padding: 10px; 
+    font-size: 5px; 
+  }
