@@ -4,23 +4,50 @@
     --color-detalles: #FFF;
   }
   
-  .colorFondo {
+  .colorFondoLogin {
     min-height: 100vh;
     background-color: var(--color-secundario) !important;
   }
+
+  .input-login {
+    background-color: var(--color-primario) ;
+    color: var(--color-secundario) ;
+    font-weight: 700;
+    transition: 0.3s;
+  }
   
-  .btn-main {
+  .input-login:hover {
+    color: var(--color-detalles) ;
+  
+    -webkit-box-shadow:0px 0px 34px 0px rgba(255,255,255,0.53);
+    -moz-box-shadow: 0px 0px 34px 0px rgba(255,255,255,0.53);
+    box-shadow: 0px 0px 34px 0px rgba(255,255,255,0.53);
+    transition: 0.3s;
+  }
+  
+  .input-login::placeholder {
+    color: var(--color-secundario) ;
+    font-weight: 700;
+  }
+  
+  .input-login:focus {
+    background-color: var(--color-secundario) ;
+    color: var(--color-detalles) ;
+    transition: 0.3s;
+  }
+  
+  .input-login:focus::placeholder {
+    color: var(--color-detalles) ;
+    transition: 0.3s;
+  }
+  
+  .btn-login {
     background-color: var(--color-primario) !important;
     color: var(--color-detalles) !important;
-    width: 100px;
     font-weight: 700;
     font-size: 20px;
     border-radius: 45px;
     padding: 0.2em;
-  }
-  
-  #label1 {
-    color: var(--color-detalles) !important;
   }
   
   .input-large {

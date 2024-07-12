@@ -5,22 +5,36 @@ export default class Login extends Component {
   render() {
     return (
       <>
-        <div className="colorFondo">
-            <div className="imagen d-flex justify-content-center">
-            <img src="/images/Vault-Pass.png" alt=""></img>
-            </div>
+        <div className="colorFondoLogin">
+        <h1 className="text-center text-white text-uppercase fw-bold col-12 pt-5 titulo">
+              Inicio de sesión
+            </h1>
+          <div className="imagen d-flex justify-content-center">
+            <img src="/images/Vault-Pass.png" className="img-fluid" alt=""></img>
+          </div>
           <div className="d-flex justify-content-center">
-            <form action="">
-              <label id="label1">Correo</label>
-              <br />
-              <input type="email" name="correo" className="input-large rounded-3" />
-              <br />
-              <label id="label1">Contraseña</label>
-              <br />
-              <input type="password" name="pwsd" className="input-large rounded-3" />
-              <br />
-              <div className="class d-flex justify-content-center pt-3">
-                <input type="submit" className="btn btn-main" value="Enviar" />
+            <form action="" className="col-10 col-sm-6 col-md-4 d-flex flex-wrap justify-content-center">
+              <label htmlFor="email" className="text-white text-uppercase fw-bold col-12 ps-2 pt-2">
+                Correo
+              </label>
+              <input
+                type="email"
+                id="email"
+                className="input-login form-check rounded-3 border-0 col-12"
+                placeholder="Email@gmail.com"
+              />
+              <label htmlFor="password" className="text-white text-uppercase fw-bold col-12 ps-2 pt-2">
+                Contraseña
+              </label>
+              <input
+                type="password"
+                nid="password"
+                className="input-login form-check rounded-3 border-0 col-12"
+                placeholder="**********"
+              />
+              <div className="class d-flex justify-content-around  col-12">
+                <input type="submit" className="input-login text-center rounded-3 border-0 col-5 pt-2 pb-2 mt-4 " value="Iniciar sesion" />
+                <a href="/register" className="input-login text-center rounded-3 border-0 col-5 pt-2 pb-2 mt-4 text-decoration-none">Crear cuenta</a>
               </div>
             </form>
           </div>
